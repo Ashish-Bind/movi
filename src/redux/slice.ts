@@ -1,4 +1,5 @@
 import { PayloadAction, configureStore, createSlice } from '@reduxjs/toolkit'
+import { getWatchlist } from '../utils/localstorage'
 
 const moviesState: MovieState = {
   loading: false,
@@ -9,7 +10,7 @@ const moviesState: MovieState = {
 
 const watchlistState: WatchlistState = {
   loading: false,
-  movies: [],
+  movies: getWatchlist(),
   error: false,
 }
 
@@ -25,17 +26,11 @@ const movieSlice = createSlice({
       state.movies = action.payload
     },
     getMoviesFail: (state) => {
-      state.error = true
-    },
-    getSingleMovieRequest: (state) => {
-      state.loading = true
+      state.loading = false
     },
     getSingleMovieSuccess: (state, action: PayloadAction<SingleMovie>) => {
       state.loading = false
       state.singleMovie = action.payload
-    },
-    getSingleMovieFail: (state) => {
-      state.error = true
     },
   },
 })
@@ -43,7 +38,17 @@ const movieSlice = createSlice({
 const watchListSlice = createSlice({
   name: 'watchlist',
   initialState: watchlistState,
-  reducers: {},
+  reducers: {
+    addToWatchlist: (state, action: PayloadAction<SingleMovie>) => {
+      if (state.movies.some((i) => i.imdbID === action.payload.imdbID)) {
+        state.movies = state.movies.filter(
+          (i) => i.imdbID !== action.payload.imdbID
+        )
+      } else {
+        state.movies = [...state.movies, action.payload]
+      }
+    },
+  },
 })
 
 export const store = configureStore({
@@ -57,7 +62,7 @@ export const {
   getMoviesSuccess,
   getMoviesFail,
   getMoviesRequest,
-  getSingleMovieFail,
-  getSingleMovieRequest,
   getSingleMovieSuccess,
 } = movieSlice.actions
+
+export const { addToWatchlist } = watchListSlice.actions
