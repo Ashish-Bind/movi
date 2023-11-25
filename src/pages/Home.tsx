@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import MovieCard from '../components/MovieCard'
 
 const Home = () => {
-  const state: MovieState = useSelector((state) => state.movie)
+  const state: MovieState = useSelector((state: State) => state.movie)
 
   if (state.loading) {
     return (

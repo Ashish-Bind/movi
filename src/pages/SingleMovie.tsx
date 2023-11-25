@@ -13,11 +13,15 @@ import { setWatchlist } from '../utils/localstorage'
 const SingleMovie = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const state: SingleMovie = useSelector((state) => state.movie.singleMovie)
-  const watchlist: SingleMovie[] = useSelector(
-    (state) => state.watchList.movies
+  const state: SingleMovie = useSelector(
+    (state: State) => state.movie.singleMovie!
   )
-  const loading = useSelector((state) => state.movie.loading)
+  const loading: MovieState['loading'] = useSelector(
+    (state: State) => state.movie.loading!
+  )
+  const watchlist: SingleMovie[] = useSelector(
+    (state: State) => state.watchList.movies
+  )
 
   const getSingleMovie = async () => {
     try {

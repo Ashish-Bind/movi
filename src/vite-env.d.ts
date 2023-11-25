@@ -39,3 +39,8 @@ interface WatchlistState {
   movies: SingleMovie[]
   error?: boolean
 }
+
+interface State {
+  movie: MovieState
+  watchList: WatchlistState
+}
