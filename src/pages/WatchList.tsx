@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import MovieCard from '../components/MovieCard'
 
 const WatchList = () => {
-  const state = useSelector((state) => state.watchList)
+  const state = useSelector((state: State) => state.watchList)
 
   return (
     <main>
@@ -12,7 +12,7 @@ const WatchList = () => {
           : 'No movies added in watchlist'}
       </div>
       <div className="grid lg:mx-16 lg:grid-cols-3 gap-4 p-4 rounded-md">
-        {state.movies.map((item) => {
+        {state.movies.map((item: Movies) => {
           return <MovieCard {...item} key={item.imdbID} />
         })}
       </div>
