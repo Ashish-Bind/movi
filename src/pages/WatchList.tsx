@@ -12,7 +12,7 @@ const WatchList = () => {
           : 'No movies added in watchlist'}
       </div>
       <div className="grid lg:mx-16 lg:grid-cols-3 gap-4 p-4 rounded-md">
-        {state.movies.map((item: Movies) => {
+        {state.movies.map((item) => {
           return <MovieCard {...item} key={item.imdbID} />
         })}
       </div>

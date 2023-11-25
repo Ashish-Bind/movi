@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const MovieCard = ({ Title, Year, Type, Poster, imdbID }: Movies) => {
+const MovieCard = ({ Title, Year, Type, Poster, imdbID }: SingleMovie) => {
   return (
     <div className=" w-full lg:flex justify-start rounded-md">
       <div
@@ -12,7 +12,7 @@ const MovieCard = ({ Title, Year, Type, Poster, imdbID }: Movies) => {
       <div className="  bg-gray-700 rounded-b p-3 flex flex-col justify-between gap-2 lg:rounded-r-md flex-grow">
         <div className="text-white font-bold text-xl">{Title}</div>
         <p className="text-sm text-gray-200">
-          Year-<span className="font-medium text-white">{Year}</span>
+          Year- <span className="font-medium text-white">{Year}</span>
         </p>
         <p className="font-medium py-1 px-2 bg-pink-500 text-white rounded-md text-sm w-fit">
           {Type}
